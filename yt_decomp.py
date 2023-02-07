@@ -25,7 +25,3 @@ def process_times(vid):
 vid = input("Enter a YouTube Video URL: ")
 
 times_list = process_times(vid)
-
-print(times_list)
-
-
