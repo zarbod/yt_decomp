@@ -17,12 +17,6 @@ def process_chapters(vid):
     stmp_list = map(lambda x : x.split(' ', 1), stmp_list)
     stmp_list = map(lambda x : [x[0], x[1][:-1]], stmp_list)
     return list(stmp_list)
-    # fin_list = []
-    # for x in stmp_list:
-    #     if not (x in fin_list):
-    #         fin_list.append(x)
-    # 
-    # return list(map(stamp_to_sec, fin_list))
 
 vid = input("Enter a YouTube Video URL: ")
 
