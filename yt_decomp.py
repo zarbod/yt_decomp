@@ -25,8 +25,8 @@ def decompose(times, names, dir_name):
     for name in names:
         name_of_file = (name[1:] if name[0] == '-' else name).strip()
         name_of_file = str("\"" + dir_name + "/" + name_of_file + ".mp3\"")
-        end_chunk = "-t " + str(end_time) if end_time != -1 else "" 
-        command = "ffmpeg -ss " + str(start_time) + " -i audio.mp3 " + end_chunk + " " + name_of_file
+        end_chunk = " -t " + str(end_time - start_time) if end_time != -1 else "" 
+        command = "ffmpeg -ss " + str(start_time) + " -i audio.mp3" + end_chunk + " " + name_of_file
         # print(command)
         os.system(command)
         start_time = end_time
