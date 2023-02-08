@@ -22,7 +22,7 @@ def process_chapters(vid):
     stmp_list = map(lambda x : [x[0], x[1][:-1]] if x[1][:-1] == '\n' else x, stmp_list)
     return list(stmp_list)
 
-def decompose(times, names, dir_name):
+def decompose(times, names, dir_name, file_name):
     i = 2
     start_time = 0
     end_time = times[1]
@@ -30,7 +30,7 @@ def decompose(times, names, dir_name):
         name_of_file = (name[1:] if name[0] == '-' else name).strip()
         name_of_file = str("\"" + dir_name + system_delim + name_of_file + ".mp3\"")
         end_chunk = " -t " + str(end_time - start_time) if end_time != -1 else "" 
-        command = "ffmpeg -ss " + str(start_time) + " -i audio.mp3" + end_chunk + " " + name_of_file
+        command = "ffmpeg -ss " + str(start_time) + " -i " + file_name + end_chunk + " " + name_of_file
         os.system(command)
         start_time = end_time
         if i < len(times):
@@ -41,14 +41,19 @@ def decompose(times, names, dir_name):
     
 vid = input("Enter a YouTube Video URL: ")
 dir = input("Enter name of directory to send to: ")
-os.mkdir(dir)
+
+if (not os.path.exists(dir)):
+    os.mkdir(dir)
+
 chapters = process_chapters(vid)
 
 times = list(map(stamp_to_sec, list(map(lambda x : x[0], chapters))))
 names = list(map(lambda x : x[1], chapters))
 
+file_name = dir + system_delim + 'audio77788899911122qqqddfffeeee.mp3'
+
 ydl_opts = {
-        'outtmpl': dir + system_delim + 'audio.mp3',
+        'outtmpl': file_name,
         'format' : 'bestaudio/best',
         'postprocessors' : [{
             'key': 'FFmpegExtractAudio',
@@ -60,6 +65,6 @@ ydl_opts = {
 with youtube_dl.YoutubeDL(ydl_opts) as ydl:
     ydl.download([vid])
 
-decompose(times, names, dir)
+decompose(times, names, dir, file_name)
 
-os.system("rm -rf audio.mp3")
+os.remove(file_name)
