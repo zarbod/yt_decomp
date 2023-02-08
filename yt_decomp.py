@@ -10,9 +10,10 @@ def stamp_to_sec(stamp):
     units = list(map(int, units))
     units.reverse()
     return sum(list(map(operator.mul, units, [1, 60, 3600])))
+
 def process_chapters(vid):
     desc = YouTube(vid).description
-    timestamp_regex = re.compile(r'[0-9]?[0-9]?:?[0-9]?[0-9]:[0-9][0-9]\s.*\n')
+    timestamp_regex = re.compile(r'[0-9]?[0-9]?:?[0-9]?[0-9]:[0-9][0-9]\s.*\n?')
     stmp_list = timestamp_regex.findall(desc)
     stmp_list = map(lambda x : x.split(' ', 1), stmp_list)
     stmp_list = map(lambda x : [x[0], x[1][:-1]], stmp_list)
@@ -27,7 +28,6 @@ def decompose(times, names, dir_name):
         name_of_file = str("\"" + dir_name + "/" + name_of_file + ".mp3\"")
         end_chunk = " -t " + str(end_time - start_time) if end_time != -1 else "" 
         command = "ffmpeg -ss " + str(start_time) + " -i audio.mp3" + end_chunk + " " + name_of_file
-        # print(command)
         os.system(command)
         start_time = end_time
         if i < len(times):
