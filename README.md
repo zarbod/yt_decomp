@@ -17,7 +17,7 @@ Gentoo Linux
 ## Current Limitations:
 Video must have timestamps in the following format
 
-<timestamp> <title>
+&lt timestamp &gt <title>
 
 The following formats don't work:
 
