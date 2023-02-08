@@ -10,3 +10,5 @@ pytube and youtube_dl python libraries
 ## Tested on the following platforms:
 
 Gentoo Linux
+
+(should work with MacOS and Windows in theory)
