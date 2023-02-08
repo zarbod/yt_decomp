@@ -1,5 +1,5 @@
 # yt_decomp
-Python script for splitting YouTube video audio according to timestamps.
+Python script for splitting YouTube video audio according to timestamps from the description.
 
 ## Requirements for running:
 python 3 (duh)
@@ -15,7 +15,7 @@ Gentoo Linux
 (should work with MacOS and Windows in theory)
 
 ## Current Limitations:
-Video must have timestamps in the following format
+Video must have timestamps in the description in the following format
 
 \<timestamp\> \<title\>
 
