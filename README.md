@@ -13,3 +13,16 @@ pytube and youtube_dl python libraries
 Gentoo Linux
 
 (should work with MacOS and Windows in theory)
+
+## Current Limitations:
+Video must have timestamps in the following format
+
+<timestamp> <title>
+
+The following formats don't work:
+
+<title> <timestamp>
+
+<timstamp>
+
+Support may be added in the future.
