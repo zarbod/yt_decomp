@@ -6,6 +6,8 @@ import os
 import re
 import youtube_dl
 
+system_delim = '\\' if platform.system() == "Windows" else '/'
+
 def stamp_to_sec(stamp):
     units = stamp.split(":")
     units = list(map(int, units))
@@ -24,7 +26,6 @@ def decompose(times, names, dir_name):
     i = 2
     start_time = 0
     end_time = times[1]
-    system_delim = '\\' if platform.system() == "Windows" else '/'
     for name in names:
         name_of_file = (name[1:] if name[0] == '-' else name).strip()
         name_of_file = str("\"" + dir_name + system_delim + name_of_file + ".mp3\"")
@@ -47,7 +48,7 @@ times = list(map(stamp_to_sec, list(map(lambda x : x[0], chapters))))
 names = list(map(lambda x : x[1], chapters))
 
 ydl_opts = {
-        'outtmpl':'audio.mp3',
+        'outtmpl': dir + system_delim + 'audio.mp3',
         'format' : 'bestaudio/best',
         'postprocessors' : [{
             'key': 'FFmpegExtractAudio',
