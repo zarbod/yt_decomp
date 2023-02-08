@@ -7,4 +7,6 @@ ffmpeg installed and in $PATH
 
 pytube and youtube_dl python libraries
 
-unix-like directory and file names (common Windows L)
+Tested on the following platforms:
+
+Gentoo Linux
