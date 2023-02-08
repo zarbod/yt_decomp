@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 from pytube import YouTube
+import platform
 import operator
-import re
 import os 
+import re
 import youtube_dl
 
 def stamp_to_sec(stamp):
@@ -16,16 +17,17 @@ def process_chapters(vid):
     timestamp_regex = re.compile(r'[0-9]?[0-9]?:?[0-9]?[0-9]:[0-9][0-9]\s.*\n?')
     stmp_list = timestamp_regex.findall(desc)
     stmp_list = map(lambda x : x.split(' ', 1), stmp_list)
-    stmp_list = map(lambda x : [x[0], x[1][:-1]], stmp_list)
+    stmp_list = map(lambda x : [x[0], x[1][:-1]] if x[1][:-1] == '\n' else x, stmp_list)
     return list(stmp_list)
 
 def decompose(times, names, dir_name):
     i = 2
     start_time = 0
     end_time = times[1]
+    system_delim = '\\' if platform.system() == "Windows" else '/'
     for name in names:
         name_of_file = (name[1:] if name[0] == '-' else name).strip()
-        name_of_file = str("\"" + dir_name + "/" + name_of_file + ".mp3\"")
+        name_of_file = str("\"" + dir_name + system_delim + name_of_file + ".mp3\"")
         end_chunk = " -t " + str(end_time - start_time) if end_time != -1 else "" 
         command = "ffmpeg -ss " + str(start_time) + " -i audio.mp3" + end_chunk + " " + name_of_file
         os.system(command)
