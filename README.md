@@ -2,7 +2,7 @@
 Python script for splitting YouTube video audio according to timestamps from the description.
 
 ## Requirements for running:
-python 3 (duh)
+python 3 
 
 ffmpeg installed and in $PATH
 
